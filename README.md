@@ -1,4 +1,14 @@
-# Bonsai web demo — on-device message triage (WebGPU)
+# sysf.io on-device demo — Bonsai-1.7B on WebGPU
+
+Two sysf.io-branded single-file pages built from the working engine by `_brand.py`
+(run `python _brand.py` after changing `index.html` or the branding):
+
+- **`sysf-triage.html`** (deployed as the root page) — support-message triage
+- **`sysf-chat.html`** (deployed as `chat.html`) — free multi-turn chat
+
+`index.html` in this folder is the unbranded working base (engine source of truth).
+
+# Base demo — on-device message triage (WebGPU)
 
 A single-file, self-contained web app that runs the **smallest 1-bit Bonsai model**
 (`Bonsai-1.7B`, Q1_0, ~237 MB) **100% in the browser on WebGPU** — no server. Paste a
