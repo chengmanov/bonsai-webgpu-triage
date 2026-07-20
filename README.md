@@ -36,10 +36,14 @@ instant and offline. Requires WebGPU **and** WebGL (the landing animation uses W
 
 This page is **adapted** from the open **"Bonsai WebGPU Kernels"** demo by
 webml-community / Xenova (MIT):
-<https://huggingface.co/spaces/webml-community/bonsai-webgpu-kernels>. The only changes
-are: repointed from `Bonsai-27B-gguf` to the smallest **`Bonsai-1.7B-gguf`**, relabeled,
-and framed for support-message triage (a triage instruction is prepended to each user
-message). The inference engine is unchanged.
+<https://huggingface.co/spaces/webml-community/bonsai-webgpu-kernels>, which was built
+for the 27B `qwen35` hybrid architecture. Because the smaller Bonsai models use the
+plain **`qwen3`** architecture, the engine was **ported**: the GGUF config path reads
+qwen3 metadata (all layers full-attention, rotary_dim synthesized), the per-layer norm
+tensor name maps to `ffn_norm.weight`, the attention output gate was removed from the
+decode QKV kernel + manifest (plain `[q;k;v]` packing) and the scalar attention
+fallback, and each message is triaged independently (no chat-history accumulation).
+Measured on a desktop GPU: ~114 tok/s, TTFT ~300 ms.
 
 ### Earlier CPU-WASM exploration (superseded)
 
